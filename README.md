@@ -42,29 +42,3 @@ A Simple Library Management System that helps in managing a library.
   ```sql
   python manage.py runserver
   ```
-
-### Screenshots
-Login and Register Pages.
-<img width="1440" alt="Screenshot" src="">
-
-<img width="1439" alt="Screenshot" src="">
-
-Dashboard.
-<img width="1426" alt="Screenshot" src="">
-
-Members Pages.
-<img width="1440" alt="Screenshot" src="">
-
-<img width="1424" alt="Screenshot" src="">
-
-Books Pages.
-<img width="1424" alt="Screenshot" src="">
-
-<img width="1423" alt="Screenshot" src="">
-
-Other Pages.
-<img width="1439" alt="Screenshot" src="">
-
-<img width="1423" alt="Screenshot" src="">
-
-<img width="1425" alt="Screenshot" src="">
