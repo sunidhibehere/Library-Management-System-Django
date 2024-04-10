@@ -2,7 +2,7 @@ import logging
 from django.db.models import Count
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.db.models import Q,Sum
 from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.utils.decorators import method_decorator
@@ -34,6 +34,13 @@ class HomeView(View):
         - recently_added_books: The 4 most recently added books.
         - total_amount: Total amount of money collected from payments.
         - overdue_amount: Total amount of money that overdue books have accrued.
+        - category_frequency: Frequency of books borrowed per category.
+        - returned_books_data: Count of returned books.
+        - non_returned_books_data: Count of non-returned books.
+        - labels: Labels for the line chart (months).
+        - books_quantity: Quantity of books added per month for the line chart.
+        - books_borrowed: Quantity of books borrowed per month for the line chart.
+        - fine_collection_data: Fine collection data for the last 5 months.
     """
 
     def get(self, request, *args, **kwargs):
@@ -51,6 +58,7 @@ class HomeView(View):
 
         total_amount = sum([payment.amount for payment in Transaction.objects.all()])
         overdue_amount = sum([book.fine for book in overdue_books])
+
         CATEGORY_CHOICES = (
             ("fiction", "Fiction"),
             ("non-fiction", "Non-Fiction"),
@@ -73,9 +81,22 @@ class HomeView(View):
         returned_books_data = BorrowedBook.objects.filter(returned=True).count()
         non_returned_books_data = BorrowedBook.objects.filter(returned=False).count()
 
+        # Line chart data
+        labels = []
+        books_quantity = []
+        books_borrowed = []
 
+        # Example: Fetch data from Book model for the last 5 months
+        for i in range(5, 0, -1):
+            month = timezone.now().date() - timezone.timedelta(days=i * 30)
+            labels.append(month.strftime("%b"))
+            books_quantity.append(Book.objects.filter(created_at__month=month.month).count())
+            books_borrowed.append(BorrowedBook.objects.filter(return_date__month=month.month).count())
 
-        
+        fine_collection_data = Transaction.objects.filter(
+            created_at__gte=timezone.now() - timezone.timedelta(days=30 * 5)
+        ).values('created_at__month').annotate(total_fine=Sum('amount')).order_by('created_at__month')
+
         context = {
             "total_members": total_members,
             "total_books": total_books,
@@ -85,14 +106,15 @@ class HomeView(View):
             "total_amount": total_amount,
             "overdue_amount": overdue_amount,
             "category_frequency": category_frequency,
-            'returned_books_data': returned_books_data,
-            'non_returned_books_data': non_returned_books_data,
-            
-           
+            "returned_books_data": returned_books_data,
+            "non_returned_books_data": non_returned_books_data,
+            "labels": labels,
+            "books_quantity": books_quantity,
+            "books_borrowed": books_borrowed,
+            "fine_collection_data": fine_collection_data,
         }
 
         return render(request, "index.html", context)
-
 
 @method_decorator(login_required, name="dispatch")
 class AddMemberView(View):
