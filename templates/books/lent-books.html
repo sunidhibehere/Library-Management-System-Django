@@ -1,6 +1,25 @@
 {% extends 'base.html' %}
 {% block title %}Add Member{% endblock %}
 {% block content %}
+<style>
+    /* CSS for curving the edges of the search bar */
+    .input-group input[type="text"] {
+        border-radius: 20px; /* Adjust the border-radius value to control the curvature */
+    }
+
+    .input-group .btn-primary {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 20px; /* Adjust the border-radius value to match the text field */
+        border-bottom-right-radius: 20px; /* Adjust the border-radius value to match the text field */
+    }
+
+    .btn-danger {
+        background-color: #f44336; /* Red color */
+        color: #fff; /* Text color */
+    }
+</style>
+
 <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">

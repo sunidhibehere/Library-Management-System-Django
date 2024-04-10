@@ -1,11 +1,38 @@
 {% extends 'base.html' %}
 {% block title %}Add Book{% endblock %}
 {% block content %}
+<style>
+    /* Style for form fields */
+    .form-group input[type="text"],
+    .form-group textarea,
+    .form-group input[type="date"],
+    .form-group select,
+    .form-group input[type="number"] {
+        border-radius: 10px; /* Curve the edges */
+        border: 1px solid #ced4da; /* Border color */
+        padding: 8px 12px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Style for add button */
+    .btn-primary:hover {
+        background-color: green; /* Change to light green on hover */
+        border-color: green;
+    }
+
+    /* Style for cancel button */
+    .btn-light:hover {
+        background-color: red; /* Change to red on hover */
+        border-color: red;
+    }
+</style>
+
 <div class="row">
     <div class="col-md-6 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Issue Book</h4>
+          <h4 class="card-title" style="font-size: x-large">Issue Book</h4>
           <p class="card-description">
             Issue A Borrowed Book To {{ member.name }}
           </p>
@@ -50,4 +77,3 @@
   </div>
 
 {% endblock %}
-
