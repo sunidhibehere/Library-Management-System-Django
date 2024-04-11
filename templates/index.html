@@ -17,19 +17,19 @@
 
 
                     <div class="col">
-                      <p class="statistics-title">Members</p>
+                      <p class="statistics-title" style="font-size: 15px">Members</p>
                       <a href="{% url 'members' %}" class="stats"><h3 class="rate-percentage">{{ total_members }}</h3></a>
                     </div>
                     <div class="col">
-                      <p class="statistics-title">Books</p>
+                      <p class="statistics-title" style="font-size: 15px">Books</p>
                       <a href="{% url 'books' %}" class="stats"><h3 class="rate-percentage">{{ total_books }}</h3></a>
                     </div>
                     <div class="col">
-                      <p class="statistics-title">Borrowed Books</p>
+                      <p class="statistics-title" style="font-size: 15px">Borrowed Books</p>
                       <a href="{% url 'lent-books' %}" class="stats"><h3 class="rate-percentage">{{ total_borrowed_books }}</h3></a>
                     </div>
                     <div class="col">
-                      <p class="statistics-title">Overdue Books</p>
+                      <p class="statistics-title" style="font-size: 15px">Overdue Books</p>
                       <a href="{% url 'overdue-books' %}" class="stats"><h3 class="rate-percentage">{{ total_overdue_books }}</h3></a>
                     </div>
                   </div>
@@ -43,26 +43,26 @@
                           <div class="card-body">
                             <div class="d-sm-flex justify-content-between align-items-start">
                               <div>
-                               <h4 class="card-title card-title-dash">Recently Added Books</h4>
+                               <p class="card-title card-title-dash" style="font-size: large">Recently Added Books</p>
                               </div>
                             </div>
                             <div class="table-responsive ">
                               <table class="table select-table">
                                 <thead>
                                   <tr>
-                                    <th>Title</th>
-                                    <th>Author</th>
-                                    <th>Category</th>
-                                    <th>Quantity</th>
+                                    <th style="font-size: 13px">Title</th>
+                                    <th style="font-size: 13px">Author</th>
+                                    <th style="font-size: 13px">Category</th>
+                                    <th style="font-size: 13px">Quantity</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   {% for book in recently_added_books %}
                                     <tr>
-                                      <td>{{ book.title }}</td>
-                                      <td>{{ book.author }}</td>
-                                      <td>{{ book.category }}</td>
-                                      <td>{{ book.quantity }}</td>
+                                      <td style="font-size: 13px">{{ book.title }}</td>
+                                      <td style="font-size: 13px">{{ book.author }}</td>
+                                      <td style="font-size: 13px">{{ book.category }}</td>
+                                      <td style="font-size: 13px">{{ book.quantity }}</td>
                                     </tr>
                                   {% endfor %}
                                 </tbody>
@@ -78,7 +78,7 @@
                     <div class="col-md-6 col-lg-12 grid-margin stretch-card">
                       <div class="card bg-primary card-rounded">
                         <div class="card-body pb-0">
-                          <h4 class="card-title card-title-dash text-white mb-4">Amount</h4>
+                          <p class="card-title card-title-dash text-white mb-4" style="font-size: large">Amount</p>
                           <div class="row">
                             <div class="col-sm-8">
                               <p class="status-summary-ight-white mb-1">Total amount</p>
@@ -98,7 +98,7 @@
                     <div class="col-md-6 col-lg-12 grid-margin stretch-card">
                       <div class="card bg-primary card-rounded">
                         <div class="card-body pb-0">
-                          <h4 class="card-title card-title-dash text-white">Overdue Amount</h4>
+                          <p class="card-title card-title-dash text-white" style="font-size: large">Overdue Amount</p><br>
 
                               <h2 class="text-info mb-4">Rs. {{overdue_amount}}</h2>
 

@@ -85,39 +85,40 @@
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
+    <li class="nav-item nav-category" style="font-size: 12px">Home</li>
     <li class="nav-item">
       <a class="nav-link" href="{% url 'home' %}">
         <i class="mdi mdi-grid-large menu-icon"></i>
-        <span class="menu-title">Dashboard</span>
+        <span class="menu-title" style="font-size: 13px">Dashboard</span>
       </a>
     </li>
-    <li class="nav-item nav-category">Users</li>
+    <li class="nav-item nav-category" style="font-size: 12px">Users</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
         <i class="menu-icon mdi mdi-account-multiple"></i>
-        <span class="menu-title">Members</span>
+        <span class="menu-title" style="font-size: 13px">Members</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{% url 'add-member' %}">Add Member</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{% url 'members' %}">View Members</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'add-member' %}" style="font-size: 13px">Add Member</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{% url 'members' %}" style="font-size: 13px">View Members</a></li>
         </ul>
       </div>
     </li>
-    <li class="nav-item nav-category">Library</li>
+    <li class="nav-item nav-category" style="font-size: 12px">Library</li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false"
         aria-controls="form-elements">
         <i class="menu-icon mdi mdi-book-multiple"></i>
-        <span class="menu-title">Books</span>
+        <span class="menu-title" style="font-size: 13px">Books</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="form-elements">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" href="{% url 'add-book' %}">Add Book</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'books' %}">View Books</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'lent-books' %}">Lent Books</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'add-book' %}" style="font-size: 13px">Add Book</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'books' %}" style="font-size: 13px">View Books</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'lent-books' %}" style="font-size: 13px">Lent Books</a></li>
         </ul>
       </div>
     </li>
@@ -125,16 +126,16 @@
       <a class="nav-link" data-bs-toggle="collapse" href="#payments" aria-expanded="false"
         aria-controls="payments">
         <i class="menu-icon mdi mdi-credit-card-multiple"></i>
-        <span class="menu-title">Payments</span>
+        <span class="menu-title" style="font-size: 13px">Payments</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="payments">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"><a class="nav-link" href="{% url 'payments' %}">View Payments</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'payments' %}" style="font-size: 13px">View Payments</a></li>
         </ul>
       </div>
     </li>
-    
+
 
   </ul>
 </nav>
