@@ -5,6 +5,7 @@
     .stats {
         text-decoration: none;
     }
+
 </style>
 <div class="row">
     <div class="col-sm-12">
@@ -14,8 +15,6 @@
               <div class="row">
                 <div class="col-sm-12">
                   <div class="statistics-details d-flex align-items-center justify-content-between row">
-
-
                     <div class="col">
                       <p class="statistics-title" style="font-size: 15px">Members</p>
                       <a href="{% url 'members' %}" class="stats"><h3 class="rate-percentage">{{ total_members }}</h3></a>
@@ -121,14 +120,14 @@
 <div style="display: inline-flex;">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div style="width: 480px;border-radius: 5%;padding: 10px;background-color:white;">
-  <canvas id="pie-chart"></canvas>
+  <canvas id="barchart"></canvas>
 </div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
       const categoryFrequency = {{ category_frequency|safe }};
 
-      const ctx = document.getElementById('pie-chart').getContext('2d');
+      const ctx = document.getElementById('barchart').getContext('2d');
       const labels = Object.keys(categoryFrequency);
       const data = Object.values(categoryFrequency);
 
@@ -230,7 +229,8 @@ var pieChart = new Chart(ctx2, {
 </div>
 
 <!-- Line Chart Section -->
-<div class="row">
+<div style="display: inline-flex;margin-top: 30px;height:320px;">
+<div class="row" style="width: 480px;margin-left: 3px;background-color:white;border-radius: 5%;padding: 14px;">
   <div class="col-sm-12">
       <div class="card card-rounded">
           <div class="card-body">
@@ -287,7 +287,8 @@ var pieChart = new Chart(ctx2, {
   });
 </script>
 
-<div class="row">
+<!--Bar Chart Section-->
+<div class="row" style="width: 480px;margin-left: 60px;background-color:white;border-radius: 5%;padding: 14px;">
   <div class="col-sm-12">
       <div class="card card-rounded">
           <div class="card-body">
@@ -297,7 +298,6 @@ var pieChart = new Chart(ctx2, {
       </div>
   </div>
 </div>
-
 <script>
   document.addEventListener("DOMContentLoaded", function () {
       const ctx = document.getElementById('bar-chart').getContext('2d');
@@ -349,4 +349,5 @@ var pieChart = new Chart(ctx2, {
       new Chart(ctx, config);
   });
 </script>
+</div>
 {% endblock content %}
