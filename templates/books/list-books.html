@@ -28,18 +28,16 @@
                   <h5 class="card-title mt-4">BOOKS LIST</h5>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="mb-3">
                             <a href="{% url 'add-book' %}" class="btn btn-primary">Add Book</a>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="mb-3">
                             <a href="{% url 'lend-book' %}" class="btn btn-success">Lend Book</a>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-md-6">
                         <form method="POST">
                             {% csrf_token %}
@@ -49,9 +47,7 @@
                             </div>
                         </form>
                     </div>
-                </div>
-
-            </div>
+           
             <div class="card-body">
                 <div class="table-responsive">
                 <table class="table table-striped">

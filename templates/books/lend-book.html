@@ -10,21 +10,8 @@
     .form-group input[type="number"] {
         border-radius: 10px; /* Curve the edges */
         border: 1px solid #ced4da; /* Border color */
-        padding: 8px 12px;
         width: 100%;
         box-sizing: border-box;
-    }
-
-    /* Style for add button */
-    .btn-primary:hover {
-        background-color: green; /* Change to light green on hover */
-        border-color: green;
-    }
-
-    /* Style for cancel button */
-    .btn-light:hover {
-        background-color: red; /* Change to red on hover */
-        border-color: red;
     }
 </style>
 
@@ -32,7 +19,7 @@
     <div class="col-md-6 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title" style="font-size: x-large">Lend Book</h4>
+          <h4 class="card-title" style="font-size: x-large ">Lend Book</h4>
           <p class="card-description">
             Lend A Book To A Member
           </p>
@@ -75,7 +62,7 @@
 
 
             <button type="submit" class="btn btn-primary btn-md me-2">Lend</button>
-            <a href="{% url 'lent-books' %}" class="btn btn-light">Cancel</a>
+            <a href="{% url 'lent-books' %}" class="btn btn-danger">Cancel</a>
           </form>
         </div>
       </div>

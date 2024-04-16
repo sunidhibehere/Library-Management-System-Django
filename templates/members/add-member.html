@@ -11,21 +11,8 @@
     .form-group input[type="number"] {
         border-radius: 10px; /* Curve the edges */
         border: 1px solid #ced4da; /* Border color */
-        padding: 8px 12px;
         width: 100%;
         box-sizing: border-box;
-    }
-
-    /* Style for add button */
-    .btn-primary:hover {
-        background-color: green; /* Change to light green on hover */
-        border-color: green;
-    }
-
-    /* Style for cancel button */
-    .btn-light:hover {
-        background-color: red; /* Change to red on hover */
-        border-color: red;
     }
 </style>
 
@@ -34,9 +21,6 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title" style="font-size: x-large">Add Member</h4>
-          <p class="card-description">
-            Add Library Member
-          </p>
           {% if form.non_field_errors %}
             <div class="alert alert-danger form-error" role="alert">
                 {% for error in form.non_field_errors %}
@@ -72,11 +56,10 @@
                 <div class="form-error">{{ form.address.errors }}</div>
         </div>
             <button type="submit" class="btn btn-primary btn-md me-2">Add</button>
-            <a class="btn btn-light" href="{% url 'members' %}">Cancel</a>
+            <a class="btn btn-danger" href="{% url 'members' %}">Cancel</a>
           </form>
         </div>
       </div>
     </div>
   </div>
-
 {% endblock %}
