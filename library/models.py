@@ -34,7 +34,7 @@ class Member(AbstractBaseModel):
     name = models.CharField(max_length=100)
     email = models.EmailField()
     mem_img = models.ImageField(blank=True, upload_to='member_images/')
-    contact = models.PositiveIntegerField(max_length=10,default=0)
+    contact = models.PositiveIntegerField(default=0)
     address = models.CharField(default='',max_length=100)
     amount_due = models.DecimalField(
         max_digits=10, decimal_places=2, default=0.00, validators=[MinValueValidator(0.00), MaxValueValidator(500.00)]
