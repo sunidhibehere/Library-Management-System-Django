@@ -81,22 +81,7 @@ class HomeView(View):
         returned_books_data = BorrowedBook.objects.filter(returned=True).count()
         non_returned_books_data = BorrowedBook.objects.filter(returned=False).count()
 
-        # Line chart data
-        labels = []
-        books_quantity = []
-        books_borrowed = []
-
-        # Example: Fetch data from Book model for the last 5 months
-        for i in range(5, 0, -1):
-            month = timezone.now().date() - timezone.timedelta(days=i * 30)
-            labels.append(month.strftime("%b"))
-            books_quantity.append(Book.objects.filter(created_at__month=month.month).count())
-            books_borrowed.append(BorrowedBook.objects.filter(return_date__month=month.month).count())
-
-        fine_collection_data = Transaction.objects.filter(
-            created_at__gte=timezone.now() - timezone.timedelta(days=30 * 5)
-        ).values('created_at__month').annotate(total_fine=Sum('amount')).order_by('created_at__month')
-
+        
         context = {
             "total_members": total_members,
             "total_books": total_books,
@@ -108,10 +93,6 @@ class HomeView(View):
             "category_frequency": category_frequency,
             "returned_books_data": returned_books_data,
             "non_returned_books_data": non_returned_books_data,
-            "labels": labels,
-            "books_quantity": books_quantity,
-            "books_borrowed": books_borrowed,
-            "fine_collection_data": fine_collection_data,
         }
 
         return render(request, "index.html", context)
