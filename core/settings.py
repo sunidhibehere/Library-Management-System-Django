@@ -1,27 +1,18 @@
-
 import os
 from pathlib import Path
-
 import environ
-
 from core.logging_formatter import CustomJsonFormatter as JsonFormatter
-
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
 environ.Env.read_env()
 
-
 SECRET_KEY = 'django-insecure-&^nn^54wcw*&k7#)mw+-+)etd!$ta-^75bo@moto#zyenoe_de'
-
 
 DEBUG = env("DEBUG", default=True)
 
 ALLOWED_HOSTS = ["*"]
-
-
-
 
 DJANGO_APPS = [
     "django.contrib.admin",
@@ -73,18 +64,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "core.wsgi.application"
 
-
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -101,8 +86,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "Asia/Kolkata"
@@ -110,9 +93,6 @@ TIME_ZONE = "Asia/Kolkata"
 USE_I18N = True
 
 USE_TZ = False
-
-
-
 
 STATIC_URL = "/static/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -122,9 +102,6 @@ if DEBUG:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
-
-
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -149,6 +126,3 @@ LOGGING = {
     },
     "root": {"level": "INFO", "handlers": ["console"]},
 }
-
-
-

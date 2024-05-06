@@ -1,9 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-
 from .models import CATEGORY_CHOICES, PAYMENT_METHOD_CHOICES, Book, BorrowedBook, Member
-
 
 class AddMemberForm(forms.ModelForm):
     name = forms.CharField(
@@ -33,7 +31,6 @@ class AddMemberForm(forms.ModelForm):
             raise ValidationError(_("A member with that email already exists."))
 
         return email
-
 
 class UpdateMemberForm(forms.ModelForm):
     name = forms.CharField(

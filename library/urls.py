@@ -24,6 +24,3 @@ urlpatterns = [
     path("delete-payment/<str:pk>/", DeletePaymentView.as_view(), name="delete-payment"),
     path("overdue-books/", OverdueBooksView.as_view(), name="overdue-books"),
 ]
-
-
-

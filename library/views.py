@@ -8,15 +8,7 @@ from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.generic import View
 
-from .forms import (
-    AddBookForm,
-    AddMemberForm,
-    LendBookForm,
-    LendMemberBookForm,
-    PaymentForm,
-    UpdateBorrowedBookForm,
-    UpdateMemberForm,
-)
+from .forms import *
 from .models import Book, BorrowedBook, Member, Transaction
 
 logger = logging.getLogger(__name__)
@@ -24,25 +16,6 @@ logger = logging.getLogger(__name__)
 
 @method_decorator(login_required, name="dispatch")
 class HomeView(View):
-    """
-    Home view for the library management system. Displays the Dashboard.
-    get(): Returns the home page with the following context:
-        - total_members: Total number of members in the library.
-        - total_books: Total number of books in the library.
-        - total_borrowed_books: Total number of books currently borrowed.
-        - total_overdue_books: Total number of books that are overdue.
-        - recently_added_books: The 4 most recently added books.
-        - total_amount: Total amount of money collected from payments.
-        - overdue_amount: Total amount of money that overdue books have accrued.
-        - category_frequency: Frequency of books borrowed per category.
-        - returned_books_data: Count of returned books.
-        - non_returned_books_data: Count of non-returned books.
-        - labels: Labels for the line chart (months).
-        - books_quantity: Quantity of books added per month for the line chart.
-        - books_borrowed: Quantity of books borrowed per month for the line chart.
-        - fine_collection_data: Fine collection data for the last 5 months.
-    """
-
     def get(self, request, *args, **kwargs):
         members = Member.objects.all()
         books = Book.objects.all()
@@ -99,12 +72,6 @@ class HomeView(View):
 
 @method_decorator(login_required, name="dispatch")
 class AddMemberView(View):
-    """
-    Add Member view for the library management system.
-    get(): Returns the add member page with the AddMemberForm.
-    post(): Validates the form and saves the new member to the database.
-    """
-
     def get(self, request, *args, **kwargs):
         form = AddMemberForm()
         return render(request, "members/add-member.html", {"form": form})
@@ -121,14 +88,8 @@ class AddMemberView(View):
 
         return render(request, "members/add-member.html", {"form": form})
 
-
 @method_decorator(login_required, name="dispatch")
 class MembersListView(View):
-    """
-    Members List view for the library management system.
-    get(): Returns the list of members in the library.
-    post(): Returns the list of members in the library based on the search query.
-    """
 
     def get(self, request, *args, **kwargs):
         members = Member.objects.all()
@@ -142,12 +103,6 @@ class MembersListView(View):
 
 @method_decorator(login_required, name="dispatch")
 class UpdateMemberDetailsView(View):
-    """
-    Update Member details view for the library management system.
-    get(): Returns the update member page with the UpdateMemberForm.
-    post(): Validates the form and updates the member details in the database.
-    """
-
     def get(self, request, *args, **kwargs):
         member = Member.objects.get(pk=kwargs["pk"])
         form = UpdateMemberForm(instance=member)
@@ -169,10 +124,6 @@ class UpdateMemberDetailsView(View):
 
 @method_decorator(login_required, name="dispatch")
 class DeleteMemberView(View):
-    """
-    Delete Member view for the library management system.
-    get(): Deletes the member from the database.
-    """
 
     def get(self, request, *args, **kwargs):
         member = Member.objects.get(pk=kwargs["pk"])
@@ -183,16 +134,9 @@ class DeleteMemberView(View):
 
 @method_decorator(login_required, name="dispatch")
 class AddBookView(View):
-    """
-    Add Book view for the library management system.
-    get(): Returns the add book page with the AddBookForm.
-    post(): Validates the form and saves the new book to the database.
-    """
-
     def get(self, request, *args, **kwargs):
         form = AddBookForm()
         return render(request, "books/add-book.html", {"form": form})
-#bhachaaaaaaaaaaaang
     def post(self, request, *args, **kwargs):
         form = AddBookForm(request.POST, request.FILES)
 
@@ -214,12 +158,6 @@ class AddBookView(View):
 
 @method_decorator(login_required, name="dispatch")
 class BooksListView(View):
-    """
-    Books List view for the library management system.
-    get(): Returns the list of books in the library.
-    post(): Returns the list of books in the library based on the search query.
-    """
-
     def get(self, request, *args, **kwargs):
         books = Book.objects.all()
         return render(request, "books/list-books.html", {"books": books})
@@ -232,12 +170,6 @@ class BooksListView(View):
 
 @method_decorator(login_required, name="dispatch")
 class UpdateBookDetailsView(View):
-    """
-    Update Book details view for the library management system.
-    get(): Returns the update book page with the AddBookForm.
-    post(): Validates the form and updates the book details in the database.
-    """
-
     def get(self, request, *args, **kwargs):
         book = Book.objects.get(pk=kwargs["pk"])
         form = AddBookForm(instance=book)
@@ -265,10 +197,6 @@ class UpdateBookDetailsView(View):
 
 @method_decorator(login_required, name="dispatch")
 class DeleteBookView(View):
-    """
-    Delete Book view for the library management system.
-    get(): Deletes the book from the database.
-    """
 
     def get(self, request, *args, **kwargs):
         book = Book.objects.get(pk=kwargs["pk"])
@@ -279,15 +207,6 @@ class DeleteBookView(View):
 
 @method_decorator(login_required, name="dispatch")
 class LendBookView(View):
-    """
-    Lend Book view for the library management system.
-    get(): Returns the lent book page with the LendBookForm and PaymentForm.
-    post(): Validates the form and lends the book to the member.
-            Several Books can be lent to the member at once.
-            if the member has exceeded the borrowing limit, an error message is displayed.
-            BorrowedBook and Transaction objects are created and the book quantity is updated.
-    """
-
     def get(self, request, *args, **kwargs):
         form = LendBookForm()
         payment_form = PaymentForm()
@@ -335,17 +254,6 @@ class LendBookView(View):
 
 @method_decorator(login_required, name="dispatch")
 class LendMemberBookView(View):
-    """
-    Lend Member Book view for the library management system.
-    Lending a book to a specific member selected from the list of members.
-    get(): Returns the lend member book page with the LendMemberBookForm and PaymentForm.
-    post(): Validates the form and lends the book to the member.
-            Several Books can be lent to the member at once.
-            if the member has exceeded the borrowing limit, an error message is displayed.
-            BorrowedBook and Transaction objects are created and the book quantity is updated.
-
-    """
-
     def get(self, request, *args, **kwargs):
         member = Member.objects.get(pk=kwargs["pk"])
         form = LendMemberBookForm()
@@ -395,12 +303,6 @@ class LendMemberBookView(View):
 
 @method_decorator(login_required, name="dispatch")
 class LentBooksListView(View):
-    """
-    Lent Books List view for the library management system.
-    get(): Returns the list of books that have been lent to members.
-    post(): Returns the list of books that have been lent to members based on the search query.
-    """
-
     def get(self, request, *args, **kwargs):
         books = BorrowedBook.objects.select_related("member", "book")
         return render(request, "books/lent-books.html", {"books": books})
@@ -412,15 +314,8 @@ class LentBooksListView(View):
         ).select_related("member", "book")
         return render(request, "books/lent-books.html", {"books": books})
 
-
 @method_decorator(login_required, name="dispatch")
 class UpdateBorrowedBookView(View):
-    """
-    Update Borrowed Book view for the library management system. Updates Details of a borrowed book.
-    get(): Returns the update borrowed book page with the UpdateBorrowedBookForm.
-    post(): Validates the form and updates the borrowed book details in the database.
-    """
-
     def get(self, request, *args, **kwargs):
         book = BorrowedBook.objects.get(pk=kwargs["pk"])
         form = UpdateBorrowedBookForm(instance=book)
@@ -441,11 +336,6 @@ class UpdateBorrowedBookView(View):
 
 @method_decorator(login_required, name="dispatch")
 class DeleteBorrowedBookView(View):
-    """
-    Delete Borrowed Book view for the library management system.
-    get(): Deletes the borrowed book from the database.
-    """
-
     def get(self, request, *args, **kwargs):
         borrowed_book = BorrowedBook.objects.get(pk=kwargs["pk"])
 
@@ -462,13 +352,6 @@ class DeleteBorrowedBookView(View):
 
 @method_decorator(login_required, name="dispatch")
 class ReturnBookView(View):
-    """
-    Return Book view for the library management system. Works on a button click.
-    get(): Returns the return book page with the PaymentForm.
-           if the book is overdue, the user is redirected to the return-book-fine page.
-           if the book is not overdue, the book status and the book quantity is updated.
-    """
-
     def get(self, request, *args, **kwargs):
         borrowed_book = BorrowedBook.objects.get(pk=kwargs["pk"])
         if borrowed_book.return_date < timezone.now().date():
@@ -489,13 +372,6 @@ class ReturnBookView(View):
 
 @method_decorator(login_required, name="dispatch")
 class ReturnBookFineView(View):
-    """
-    Return Book Fine view for the library management system. The page asks for the fine payment for overdue books.
-    get(): Returns the return book fine page with the PaymentForm.
-    post(): Validates the form and updates the borrowed book status and the book quantity in the database.
-            Transaction object is created
-    """
-
     def get(self, request, *args, **kwargs):
         form = PaymentForm()
         book = BorrowedBook.objects.get(pk=kwargs["pk"])
@@ -527,12 +403,6 @@ class ReturnBookFineView(View):
 
 @method_decorator(login_required, name="dispatch")
 class ListPaymentsView(View):
-    """
-    List Payment View for the library management system.
-    get(): Returns a list of payments made.
-    post(): Returns a list of payments made by a member based on the search query.
-    """
-
     def get(self, request, *args, **kwargs):
         payments = Transaction.objects.select_related("member")
         return render(request, "payments/list-payments.html", {"payments": payments})
@@ -545,11 +415,6 @@ class ListPaymentsView(View):
 
 @method_decorator(login_required, name="dispatch")
 class DeletePaymentView(View):
-    """
-    Delete Payment view for the library management system.
-    get(): Deletes the payment from the database.
-    """
-
     def get(self, request, *args, **kwargs):
         payment = Transaction.objects.get(pk=kwargs["pk"])
         payment.delete()
@@ -558,12 +423,6 @@ class DeletePaymentView(View):
 
 
 class OverdueBooksView(View):
-    """
-    Overdue Books view for the library management system.
-    get(): Returns a list of overdue books.
-    post(): Returns a list of overdue books based on the search query.
-    """
-
     def get(self, request, *args, **kwargs):
         overdue_books = BorrowedBook.objects.filter(
             return_date__lt=timezone.now().date(), returned=False

@@ -1,8 +1,6 @@
 import uuid
-
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
-
 
 class AbstractBaseModel(models.Model):
     id = models.CharField(max_length=255, primary_key=True)
