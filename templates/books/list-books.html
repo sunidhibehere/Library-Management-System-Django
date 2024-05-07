@@ -54,7 +54,7 @@
                     <thead>
                     <tr>
                         <th>Index</th>
-                        <th>Pic</th>
+                        <th>Image</th>
                         <th>Title</th>
                         <th>Author</th>
                         <th>Category</th>
@@ -70,7 +70,7 @@
                                 <td>{{ forloop.counter }}</td>
                                 <td>
                                     {% if book.book_img %}
-                                        <img src="{{ book.book_img.url }}" alt="{{ book.title }} Image">
+                                        <img src="{{ book.book_img.url }}" alt="{{ book.title }} Image" style="width: 50px;height:50px;">
                                     {% else %}
                                         No Image Available
                                     {% endif %}
