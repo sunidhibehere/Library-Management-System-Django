@@ -6,9 +6,7 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Edit {{ member.name }}'s Details</h4>
-          <p class="card-description">
-            Edit Member Details
-          </p>
+          <p class="card-description"> Edit Member Details </p>
           {% if form.non_field_errors %}
             <div class="alert alert-danger form-error" role="alert">
                 {% for error in form.non_field_errors %}
@@ -50,5 +48,4 @@
       </div>
     </div>
   </div>
-
 {% endblock %}

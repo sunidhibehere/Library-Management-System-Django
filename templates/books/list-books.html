@@ -1,25 +1,7 @@
 {% extends 'base.html' %}
-{% block title %}Add Member{% endblock %}
+{% block title %}Books List{% endblock %}
+
 {% block content %}
-<style>
-    /* CSS for curving the edges of the search bar */
-    .input-group input[type="text"] {
-        border-radius: 20px; /* Adjust the border-radius value to control the curvature */
-    }
-
-    .input-group .btn-primary {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        border-top-right-radius: 20px; /* Adjust the border-radius value to match the text field */
-        border-bottom-right-radius: 20px; /* Adjust the border-radius value to match the text field */
-    }
-
-    .btn-danger {
-        background-color: #f44336; /* Red color */
-        color: #fff; /* Text color */
-    }
-</style>
-
 <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
@@ -36,6 +18,11 @@
                     <div class="col-md-2">
                         <div class="mb-3">
                             <a href="{% url 'lend-book' %}" class="btn btn-success">Lend Book</a>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="mb-3">
+                            <a href="{% url 'exportbooks' %}" class="btn btn-primary">Export Books</a>
                         </div>
                     </div>
                     <div class="col-md-6">
