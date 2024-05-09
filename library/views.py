@@ -1,13 +1,13 @@
 import logging
 from django.db.models import Count
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q,Sum
 from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.generic import View
-
+import csv
 from .forms import *
 from .models import Book, BorrowedBook, Member, Transaction
 
@@ -437,3 +437,32 @@ class OverdueBooksView(View):
             returned=False,
         ).select_related("member", "book")
         return render(request, "books/overdue-books.html", {"books": overdue_books})
+    
+
+@method_decorator(login_required, name="dispatch")
+class BooksExportView(View):
+    def get(self, request, *args, **kwargs):
+        books = Book.objects.all()
+        response = HttpResponse(
+            content_type='text/csv',
+            headers={'Content-Disposition': 'attachment; filename="Books.csv"'},
+        )
+        writer = csv.writer(response)
+        writer.writerow(['Title', 'Author', 'Category', 'Quantity', 'Description', 'BorrowingFee', 'Status'])
+        for book in books:
+            writer.writerow([book.title, book.author, book.category, book.quantity, book.description, book.borrowing_fee, book.status])
+        return response
+
+@method_decorator(login_required, name="dispatch")
+class MembersExportView(View):
+    def get(self, request, *args, **kwargs):
+        members = Member.objects.all()
+        response = HttpResponse(
+            content_type='text/csv',
+            headers={'Content-Disposition': 'attachment; filename="Members.csv"'},
+        )
+        writer = csv.writer(response)
+        writer.writerow(['Name', 'Email', 'Contact', 'Address', 'AmountDue'])
+        for member in members:
+            writer.writerow([member.name, member.email, member.contact, member.address, member.amount_due])
+        return response

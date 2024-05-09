@@ -23,4 +23,6 @@ urlpatterns = [
     path("payments/", ListPaymentsView.as_view(), name="payments"),
     path("delete-payment/<str:pk>/", DeletePaymentView.as_view(), name="delete-payment"),
     path("overdue-books/", OverdueBooksView.as_view(), name="overdue-books"),
+    path("exportbooks/", BooksExportView.as_view(), name="exportbooks"),
+    path('exportmembers/', MembersExportView.as_view(), name='exportmembers')
 ]
