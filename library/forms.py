@@ -101,7 +101,7 @@ class LendBookForm(forms.ModelForm):
         queryset=Book.objects.filter(quantity__gt=0),
         empty_label=None,
         widget=forms.Select(
-            attrs={"class": "form-control form-control-lg js-example-basic-multiple w-100", "multiple": "multiple"}
+            attrs={"class": "form-control form-control-lg js-example-basic-multiple w-100","multiple":"multiple"}
         ),
     )
 

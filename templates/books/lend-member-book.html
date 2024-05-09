@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
 {% block title %}Add Book{% endblock %}
 {% block content %}
-
+<style>
+    /* Style for form fields */
+    .form-group input[type="text"],.form-group textarea,.form-group input[type="date"],
+    .form-group select,.form-group input[type="number"] {
+        border-radius: 10px; /* Curve the edges */
+        border: 1px solid #ced4da; /* Border color */
+        width: 100%;
+        box-sizing: border-box;
+    }
+</style>
 <div class="row">
     <div class="col-md-6 grid-margin stretch-card">
       <div class="card">
