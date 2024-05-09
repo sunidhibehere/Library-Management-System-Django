@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      # context: .
+      dockerfile: Dockerfile
+      
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver"
+    container_name: myapp
+    volumes:
+      - .:/myapp
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=False
